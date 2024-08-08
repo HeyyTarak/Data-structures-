@@ -1,3 +1,6 @@
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 struct node
@@ -21,7 +24,25 @@ void count_nodes(struct node *head)
         ptr=ptr->link;
     
     }
-    printf("%d",count);
+    printf("The total number of nodes are: %d\n",count);
+    
+}
+
+void display(struct node *head)
+{
+    if(head==NULL)
+        printf("No content");
+    struct node *ptr=NULL;
+    int i=1;
+    ptr=head;
+    while(ptr!=NULL)
+    {   
+        
+        printf(" Node %d consists of: %2d\n",i,ptr->data);
+        ptr=ptr->link;
+        i++;
+    
+    }
     
 }
 int main() {
@@ -44,6 +65,8 @@ int main() {
     current->link=NULL;
     head->link->link=current;
     
+    
     count_nodes(head);
+    display(head);
     
 }
