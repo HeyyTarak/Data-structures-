@@ -17,22 +17,37 @@ void insertionAtBegin(struct node *tail,int value)
 void insertionAtEnd(struct node **tail,int value)
 {
     struct node *new_node=malloc(sizeof(struct node));
-    struct node *ptr=*tail;
+    
     new_node->data=value;
-    new_node->link=ptr->link;
-    ptr->link=new_node;
+    new_node->link=(*tail)->link;
+    (*tail)->link=new_node;
     *tail=new_node;
+}
+
+void insertionAtCertain(struct node *tail,int value,int position)
+{
+    struct node *ptr=tail->link;
+    struct node *temp=malloc(sizeof(struct node));
+    do
+    {
+        ptr=ptr->link;
+    }while(ptr!=tail->link&&ptr->data!=position);
+    temp->data=value;
+    temp->link=ptr->link;
+    ptr->link=temp;
+    
+    
 }
 void display(struct node *tail)
 {
     
-    struct node *ptr=tail;
+    struct node *ptr=tail->link;
     do
     {
         printf("%d -> ", ptr->data);
         
         ptr=ptr->link;
-    }while (ptr!=tail);
+    }while (ptr!=tail->link);
     printf("head %d \n",tail->data);
     
 }
@@ -43,7 +58,6 @@ int main()
     tail->data=47;
     tail->link=tail;
     
-    
     insertionAtBegin(tail,45);
     insertionAtBegin(tail,54);
     insertionAtBegin(tail,80);
@@ -52,5 +66,8 @@ int main()
     
     insertionAtEnd(&tail,10);
     insertionAtEnd(&tail,20);
+    display(tail);
+    
+    insertionAtCertain(tail,1,54);
     display(tail);
 }
