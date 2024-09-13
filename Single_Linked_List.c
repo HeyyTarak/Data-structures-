@@ -7,31 +7,37 @@ struct node
     struct node *link;
 };
 
-void insertionAtBegin(struct node **head,int value)
+void insertionAtBegin(struct node **head)
 {
     struct node *ptr=*head;
     struct node *temp=malloc(sizeof(struct node));
-    temp->data=value;
+    printf("Enter the Values you want to Insert At the begin: ");
+    scanf("%d",&temp->data);
     temp->link=ptr;
     *head=temp;
 }
 
-void insertionAtEnd(struct node *head,int value)
+void insertionAtEnd(struct node *head)
 {
     struct node *ptr=head;
     struct node *temp=malloc(sizeof(struct node));
-    temp->data=value;
+    printf("Enter the Values you want to Insert At the End: ");
+    scanf("%d",&temp->data);
     while(ptr->link!=NULL)
         ptr=ptr->link;
     temp->link=NULL;
     ptr->link=temp;
 }
 
-void insertionAtCertain(struct node *head,int value,int position)
-{
+void insertionAtCertain(struct node *head)
+{   
+    int position;
     struct node *ptr=head;
     struct node *temp=malloc(sizeof(struct node));
-    temp->data=value;
+    printf("Enter the Values you want to Insert At the Certain node: ");
+    scanf("%d",&temp->data);
+    printf("At which position you want to insert enter the node Data: ");
+    scanf("%d",&position);
     while(ptr->link!=NULL)
     {   
         if(ptr->data==position)
@@ -67,20 +73,22 @@ void deletionAtEnd(struct node *head)
 }
 
 
-void count_nodes(struct node *head)
-{
-    int count=0;
+void search(struct node *head)
+{   
+    int value;
+    printf("Enter the Values you want to Search: ");
+    scanf("%d",&value);
     if(head==NULL)
         printf("There are no nodes");
-    struct node *ptr=NULL;
-    ptr=head;
-    while(ptr!=NULL)
+    struct node *ptr=head;
+    
+    while(ptr!=NULL && ptr->data==value)
     {
-        count++;
+        printf("Element is found in the List");
         ptr=ptr->link;
     
     }
-    printf("The total number of nodes are: %d\n",count);
+    
     
 }
 
@@ -98,39 +106,33 @@ void display(struct node *head)
     
 }
 int main() {
-    struct node *head;
+    struct node *head;int ch;
     head=malloc(sizeof(struct node));
     printf("Enter elements into your node 1: ");
     scanf("%d",&head->data);
     head->link=NULL;
+    while (1)
+    {
+    printf("Insertion at Begin choose 1\nInsertion at End choose 2\nInsertion at a certain node choose 3\nDeletion at Begin choose 4\nDeletion at End choose 5\nTo search Element choose 6\nTo print the list choose 7\nTo Exit the program choose 8\n");
+    scanf("%d",&ch);
+    switch(ch)
+        {
+            case 1:insertionAtBegin(&head);
+            break;
+            case 2:insertionAtEnd(head);
+            break;
+            case 3:insertionAtCertain(head);
+            break;
+            case 4:deletionAtBegin(&head);
+            break;
+            case 5:deletionAtEnd(head);
+            break;
+            case 6:search(head);
+            break;
+            case 7:display(head);
+            break;
+            case 8: exit(0);
+        }
     
-    //you can also make dynamic with scanf
-    printf("Insertion at Begining: \n");
-    insertionAtBegin(&head,10);
-    insertionAtBegin(&head,20);
-    insertionAtBegin(&head,30);
-    count_nodes(head);
-    display(head);
-
-    printf("Insertion at Ending: \n");
-    insertionAtEnd(head,60);
-    insertionAtEnd(head,70);
-    insertionAtEnd(head,80);
-    count_nodes(head);
-    display(head);
-
-    printf("insertion at specific: \n");
-    insertionAtCertain(head,25,45);
-    count_nodes(head);
-    display(head);
-
-    printf("Deletion at Begin: \n");
-    deletionAtBegin(&head);
-    count_nodes(head);
-    display(head);
-
-    printf("Deletion at End: \n");
-    deletionAtEnd(head);
-    count_nodes(head);
-    display(head);
+    }    
 }
