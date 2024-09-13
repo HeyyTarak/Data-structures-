@@ -85,6 +85,7 @@ void search(struct node *head)
     while(ptr!=NULL && ptr->data==value)
     {
         printf("Element is found in the List");
+        return;
         ptr=ptr->link;
     
     }
