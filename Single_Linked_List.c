@@ -56,22 +56,31 @@ void deletionAtBegin(struct node **head)
     free(ptr);
 }
 
-void deletionAtEnd(struct node *head)
+void deletionAtEnd(struct node **head)
 {
-    struct node *ptr = head;
+    if (*head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    struct node *ptr = *head;
     struct node *prev = NULL;
 
-    while(ptr->link != NULL)
-    {
+    // Traverse to the end of the list
+    while (ptr->link != NULL) {
         prev = ptr;
         ptr = ptr->link;
     }
 
-    prev->link = NULL;
-    
-    free(ptr); 
-}
+    // If only one node in the list
+    if (prev == NULL) {
+        *head = NULL; // Update head to NULL since the only node is deleted
+    } else {
+        prev->link = NULL; // Unlink the last node
+    }
 
+    free(ptr); // Free the last node
+}
 
 void search(struct node *head)
 {   
