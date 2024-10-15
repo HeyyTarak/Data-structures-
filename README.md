@@ -5,6 +5,7 @@ This repository contains implementations of fundamental data structures in C. Cu
 - **Singly Linked List**
 - **Doubly Linked List**
 - **Stack(ARRAY) & Stack(Linked List)**
+- **Queues(ARRAY) & Queues(Liked List)**
 
 ## Features
 
