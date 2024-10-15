@@ -32,22 +32,24 @@ void insertionAtEnd(struct node *head,int value)
     temp->prev=ptr;
 }
 
-void insertionAtCertain(struct node *head,int value,int position)
+void insertionAtCertain(struct node *head, int value, int position) 
 {
-    struct node *ptr=head;
-    struct node *temp=malloc(sizeof(struct node));
-    temp->data=value;
-    while (ptr != NULL && ptr->data != position) 
-    {
+    struct node *ptr = head;
+    struct node *temp = malloc(sizeof(struct node));
+    temp->data = value;
+
+    // Traverse the list until reaching the desired position or the end
+    for (int i = 1; i < position - 1 && ptr != NULL; i++) {
         ptr = ptr->next;
     }
-     if (ptr != NULL)
-     {
-        temp->next = ptr->next;
-        temp->prev = ptr;
+
+    // Insert the new node
+    temp->next = ptr->next;
+    temp->prev = ptr;
+    if (ptr->next != NULL) {
         ptr->next->prev = temp;
-        ptr->next = temp;
-     }
+    }
+    ptr->next = temp;
 }
 
 void deletionAtBegin(struct node **head)
