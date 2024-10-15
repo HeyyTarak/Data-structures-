@@ -42,7 +42,6 @@ int peek() {
     return top->data;
 }
 
-// Function to check if the stack is empty
 int isEmpty() {
     return top == NULL;
 }
