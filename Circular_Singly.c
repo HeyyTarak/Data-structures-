@@ -38,6 +38,30 @@ void insertionAtCertain(struct node *tail,int value,int position)
     
     
 }
+void deletionAtBegin(struct node *tail) {
+    if (tail->link == tail) {
+        printf("List is empty\n");
+        return;
+    }
+    struct node *temp = tail->link;
+    tail->link = tail->link->link;
+    free(temp);
+}
+
+void deletionAtEnd(struct node **tail) {
+    if (tail->link == tail) {
+        printf("List is empty\n");
+        return;
+    }
+    struct node *ptr = tail->link;
+    while (ptr->link != tail->link) {
+        ptr = ptr->link;
+    }
+    ptr->link = tail->link;
+    free(*tail);
+    *tail = ptr;
+}
+
 void display(struct node *tail)
 {
     
@@ -70,4 +94,11 @@ int main()
     
     insertionAtCertain(tail,1,54);
     display(tail);
+
+    deletionAtBegin(tail);
+    display(tail);
+
+    deletionAtEnd(&tail);
+    display(tail);
+
 }
